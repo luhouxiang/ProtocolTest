@@ -1,0 +1,16 @@
+# 忽略文件夹
+__pycache__/
+game_app/__pycache__/
+ProtocolTest/__pycache__/
+
+# 忽略tougu-service可执行文件
+tougu-service
+
+# 忽略tougu-service.log日志文件
+tougu-service.log
+
+# 忽略version.h版本文件
+version.h
+
+# 忽略build文件夹
+build/
