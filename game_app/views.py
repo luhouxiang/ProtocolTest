@@ -26,5 +26,10 @@ def testpost1(request):
     return HttpResponse(request.POST)    
     
 def testpost2(request):
-    print(request.POST)
-    return HttpResponse(request.POST)    
+    if request.method == 'POST':
+        drugs = request.POST.get('drugs')
+        print("打印drugs:[", drugs, "]")
+        return HttpResponse(drugs)   
+    else:
+        return render(request, 'index.html')
+        
