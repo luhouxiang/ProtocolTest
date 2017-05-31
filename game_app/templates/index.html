@@ -4,121 +4,86 @@
         <title>Ace's Upload Center</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" >
-        <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-            .sidebar-nav {
-                padding: 9px 0;
-            }
-            .footer {
-                text-align: center;
-                padding: 30px 0;
-                margin-top: 70px;
-                border-top: 1px solid #e5e5e5;
-                background-color: #f5f5f5;
-            }
-            .input
-            {
-                font: 12px Arial, Helvetica, sans-serif;
-                border: 1px solid #86888B;
-            }
-            #filedrag
-            {
-                display: none;
-                font-weight: bold;
-                text-align: center;
-                padding: 1em 0;
-                margin: 1em 0;
-                color: #555;
-                border: 2px dashed #555;
-                border-radius: 7px;
-                cursor: default;
-            }
-            #filedrag.hover
-            {
-                color: #71C671;
-                border-color: #71C671;
-                border-style: solid;
-                box-shadow: inset 0 3px 4px #888;
-            }
-            table{table-layout: fixed;}
-            td{word-break: break-all; word-wrap:break-word;}
-            footer{display:block;}
-        </style>
+		
+        <link href="/static/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <script type="text/javascript" src="/static/js/jquery-1.11.3.js"></script>
-        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/static/js/bootstrap.file-input.js"></script>
-        <script type="text/javascript">
-        </script>
+        <script type="text/javascript" src="/static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 		<script>
 			$.ajaxSetup({
 				data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
 			  });
 			  
 			function select_drug() {
+			alert("abc");
 				var drugs = '来自post2';
 				$.post('/testpost2/', {'drugs': drugs}, function(ret){
 					$('#mytext').html(ret);
 				});
 		  }
 		</script>
-
     </head>
-    <body style="font-family:Microsoft YaHei;">
-
-        <iframe style="display:none" id="ifm" name="ifm"></iframe>
-        <!--文件列表-->
-        <div class="container">
-
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						协议测试
-					</h3>
-				</div>
-				<div class="panel-body">
-					<!--面板内容 -->
-					<form action="/getdata/" method="get">
-						  name: <input type="text" name="fname" style="width:800px;"/>
-						  <input type="submit" value="确定" />
-						  value: <textarea rows="10" cols="150" id="mytext" style="margin: 0px 0px 10px; width: 913px; height: 100px;">abcdef</textarea>
-					</form>
-					
-					<form action="/testpost1/" method="post">
-						{% csrf_token %}
-					  <input name='zqxt' value="自强学堂学习Django技术">
-					  <input type="submit" value="提交">
-					</form>
-					<br><input type="button" onclick="select_drug()" value="Submit"><br>
-				</div>
-				<div class="panel-footer">面板脚注</div>
-				<form action="/add/" method="get">
-					<button type="button">Cancel</button>
-					<button type="button" id="mycontinue" value="next">Continue</button>
+	
+<body>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			带有 title 的面板标题
+		</h3>
+	</div>
+	<div class="panel-body">
+		面板内容
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<form class="navbar-form navbar-left" role="search">
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">GET <b class="caret"></b></a>
+							<ul class="dropdown-menu" id="test">
+								<li><a id="action-1" href="#">GET</a></li>
+								<li class="divider"></li>
+								<li><a href="#">POST</a></li>
+							</ul>
+						</li>
+					</ul>
+					 <script type="text/javascript">
+						$("#test a").click(function(e){
+							if($(e.target).text() == "GET") {
+								$('#collapseFour').collapse('hide');
+							}
+							else {
+								$('#collapseFour').collapse('show');
+							}
+						});
+					</script>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Enter request URL" style="width: 626px;">
+					</div>
+					<button type="submit" class="btn btn-default">Send</button>
+					<button type="button" class="btn btn-default navbar-btn" onclick="btn_add()">+</button>
+					<button type="button" class="btn btn-default navbar-btn" onclick="btn_sub()">-</button>
 				</form>
-				<button type="button", id="myAjax" value="提交Ajax">Ajax</button>
+			   
 				<script>
-				
-					  $("#mycontinue").click(function(){
-						var a = 4;
-						var b = 6;
-				
-						$.get("/add/",{'a':a,'b':b}, function(ret){
-							$('#mytext').html(ret)
-						})
-					  });
-					
-					$("#myAjax").click(function(){
-						var host = '1.1.1.1';
-						var port = '1111';
-						$.get("/add2/",{'host':host,'port':port}, function(ret){
-							$('#mytext').html(ret)
-						})
-					});
-					
+					function btn_add() {
+						console.log("btn_add");
+					}
+					function btn_sub() {
+						console.log("btn_sub");
+					}
 				</script>
-	</body>
+			</div>
+			<div id="collapseFour" class="panel-collapse collapse">
+				<div class="panel-body" style="padding-left:0px;">
+					<textarea rows="10" cols="150" id="myPostData" style="margin: 0px 0px 10px; width: 913px; height: 100px;"></textarea>
+				</div>
+			</div>
+		</nav>
+		Response
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid" style="padding-left: 0px;">
+				<textarea rows="10" cols="150" id="myResponse" style="margin: 0px 0px 10px; width: 913px; height: 100px;"></textarea>
+			</div>
+		</nav>	
+	</div>
+</div>
+</body>
 </html>
