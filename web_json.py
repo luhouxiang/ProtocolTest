@@ -38,9 +38,9 @@ class WebJson(object):
         return self.get_url_data(url, None)
     
     # post方法
-    def post(self, params, data):
+    def post(self, url, data):
         data=bytes(data, 'utf8')
-        return self.get_url_data(params, data)
+        return self.get_url_data(url, data)
 
 
 if __name__ == '__main__':

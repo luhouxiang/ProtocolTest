@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^add/$', game_views.add, name='add'),
     url(r'^add2/$', game_views.add2, name='add2'),
     url(r'^getdata/$', game_views.getdata, name='getdata'),
+    url(r'^send/$', game_views.send, name='send'),
     url(r'^admin/', include(admin.site.urls)),
 ]

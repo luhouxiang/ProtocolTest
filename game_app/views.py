@@ -32,4 +32,18 @@ def testpost2(request):
         return HttpResponse(drugs)   
     else:
         return render(request, 'index.html')
+    
+def send(request):
+    if request.method == 'POST':
+        web = WebJson()
+        url = request.POST.get('inputurl')
+        print("打印send: ", url)
+        method = request.POST.get('method')
+        if(method == 'GET'):
+            data = web.get(url)
+        else:
+            postdata = request.POST.get('postdata')
+            data = web.post(params, postdata)
+        return HttpResponse(data)
+        
         
